@@ -10,14 +10,12 @@ class Repo extends Component {
   componentDidMount(){
     let  user = this.props.match.params.id ;
     this.setState({user : user})
-     console.log(user)
      axios.get('/repo', {
         params: {
           user: user
         }
       }).then(res=>{
         let c = res.data
-        console.log(c)
         this.setState({data : c})
       });
 
@@ -26,13 +24,25 @@ class Repo extends Component {
  
 
   render() {
+
+   
     
    const git =this.state.data ?(<div>{this.state.data.map((d,i)=>{
     return(
 
         <div key={i}>
-            <p> {d.name} </p>
-            </div>
+            <p><b> {d.name}</b> </p>
+                       <div className="row">
+                  <div className = "col-md-2 col-xs-2">
+                    </div>
+                  <div className = "col-md-8 col-xs-8">
+                  {  d.description ? <p>{d.description}</p> : <p>No Description Available</p>}
+                    </div>
+                  <div className = "col-md-2 col-xs-2">
+                    </div>
+             </div>
+             <hr/>
+        </div>
       ) 
       
   })}
@@ -46,6 +56,7 @@ class Repo extends Component {
 return (
   <div>
       <h1>All Repos of {this.state.user}</h1>
+      <hr/>
       {git}
   </div>
 );

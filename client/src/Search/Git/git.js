@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Github from '../Github/github';
 import Home from '../Home/Home';
-import { Link } from 'react-router-dom' 
+import { Link } from 'react-router-dom'; 
 
 
 
@@ -12,18 +12,17 @@ class Git extends Component {
 
   onChangeHandler = (event)=>{
     event.preventDefault(); 
-    
+    if (event.key === 'Enter') {
+      this.onClickHandler();
+}
     let data = '';    
-    data =  event.target.value;
-
-    console.log(data);
+    data =  event.target.value; 
     this.setState({user: data})
 }
 
 
   onClickHandler = ()=>{
 
-    console.log('clicked')
     axios.get('/user', {
       params: {
         user: this.state.user
@@ -41,7 +40,7 @@ class Git extends Component {
     
    const git =this.state.data ?(<div>{this.state.data.map((d,i)=>{
     return(
-    <Link to={'/data/'+d.login} key={i}>
+    <Link to={'/data/'+d.login} style={{ textDecoration: 'none' }} key={i}>
     <Github
       name={d.login}
       imageUrl={d.avatar_url}

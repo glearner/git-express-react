@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Github from '../Github/github';
-import Home from '../Home/Home';
+import Home from '../Search/Home';
 import { Link } from 'react-router-dom'; 
 
 
